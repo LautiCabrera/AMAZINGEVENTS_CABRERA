@@ -228,12 +228,4 @@ function cards(items, idContenedor) {
   document.getElementById(idContenedor).innerHTML = cardHTML;
 }
 
-const currentPage = window.location.pathname;
-
-if (currentPage === "/") {
-  cards(data.events, "mainCards");
-} else if (currentPage === "/upcoming-events.html") {
-  cards(upcomingCards, "upcomingCards");
-} else if (currentPage === "/past-events.html") {
-  cards(pastCards, "pastCards");
-}
+cards(data.events, "mainCards");

@@ -131,6 +131,12 @@ li.nav-item{
     border-radius: 5px;
 }
 
+@media (max-width: 768px) {
+    .carousel-caption h2 {
+        font-size: 4vh;
+    }    
+}
+
 .card{
     border:#000000 !important;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 3px 3px rgba(0, 0, 0, 0.08);
