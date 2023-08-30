@@ -1,1 +1,2 @@
-cards(pastCards, "pastCards");
+createCheckboxes(pastCards, "pastCheck");
+filterGeneral(pastCards, "pastCards");

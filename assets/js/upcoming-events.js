@@ -1,1 +1,2 @@
-cards(upcomingCards, "upcomingCards");
+createCheckboxes(upcomingCards, "upcomingCheck");
+filterGeneral(upcomingCards, "upcomingCards");

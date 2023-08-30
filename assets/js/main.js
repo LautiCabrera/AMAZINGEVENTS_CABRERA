@@ -198,6 +198,7 @@ const data = {
 let upcomingCards = [];
 let pastCards = [];
 
+// Separación del array principal en eventos pasados y futuros.
 for (let event of data.events) {
   if (data.currentDate < event.date) {
     upcomingCards.push(event);
@@ -206,13 +207,15 @@ for (let event of data.events) {
   }
 }
 
-function cards(items, idContenedor) {
+// Función para generar las cards de eventos dinamicamente.
+// Se le pasa un array de eventos y el id del contenedor del HTML.
+function createCards(items, idContenedor) {
   let cardHTML = "";
   for (const item of items) {
     let card = `
         <div class="col mb-4">
           <div class="card">
-            <img src="${item.image}" class="card-img-top" alt="${item.name}">
+            <img src="${item.image}" class="card-img-top card-image" alt="${item.name}">
             <div class="card-body">
                 <h5 class="card-title">${item.name}</h5>
                 <p class="card-text">${item.description}</p>
@@ -228,4 +231,60 @@ function cards(items, idContenedor) {
   document.getElementById(idContenedor).innerHTML = cardHTML;
 }
 
-cards(data.events, "mainCards");
+// Función para generar los checkboxes de eventos dinamicamente.
+// Se le pasa un array de eventos y el id del contenedor del HTML.
+function createCheckboxes(items, idContenedor) {
+  const categoriesSet = new Set();
+  let checkboxHTML = "";
+  for (const item of items) {
+    // Verificamos si la categoría ya existe.
+    if (!categoriesSet.has(item.category)) {
+      categoriesSet.add(item.category);
+      let checkbox = `
+        <li class="list-group-item d-flex justify-content-center">
+          <input type="checkbox" id="${item._id}" name="category" value="${item.category}">
+          <label for="${item._id}">${item.category}</label>
+        </li>`;
+      checkboxHTML += checkbox;
+    }
+  }
+  document.getElementById(idContenedor).innerHTML = checkboxHTML;
+}
+
+// Función para filtrar los eventos mediante los checkbox.
+// Recibe el array de eventos, el selector de checkboxes y el id del contenedor del HTML.
+function updateFilteredEvents(events, idContenedor) {
+  const checkboxes = document.querySelectorAll('input[name="category"]');
+  const selectedCategories = Array.from(checkboxes)
+    .filter((checkbox) => checkbox.checked)
+    .map((checkbox) => checkbox.value);
+  if (selectedCategories.length === 0) {
+    createCards(events, idContenedor);
+  } else {
+    const filteredEvents = events.filter((e) =>
+      selectedCategories.includes(e.category)
+    );
+    createCards(filteredEvents, idContenedor);
+  }
+}
+
+function filterGeneral(events, idContenedor) {
+  // Carga todos los eventos de la sección en la que se encuentra la página
+  window.addEventListener("load", () => {
+    createCards(events, idContenedor);
+  });
+  // Agrega los eventos filtrados a los checkboxes
+  const checkboxes = document.querySelectorAll('input[name="category"]');
+  checkboxes.forEach((checkbox) => {
+    checkbox.addEventListener("change", () => {
+      updateFilteredEvents(events, idContenedor);
+    });
+  });
+  // Limpia los filtros de los checkboxes cargando todos los de la sección
+  document.querySelector("#clearFilters").addEventListener("click", () => {
+    checkboxes.forEach((checkbox) => {
+      checkbox.checked = false;
+    });
+    createCards(events, idContenedor);
+  });
+}

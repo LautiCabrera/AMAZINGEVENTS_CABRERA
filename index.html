@@ -4,8 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
-    <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
     <!-- Íconos-->
     <script src="https://kit.fontawesome.com/edb8bcf97d.js" crossorigin="anonymous"></script>
     <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
@@ -74,41 +72,18 @@
     </header>
 
     <main class="all">
-        <div class="container-fluids pt-4 p-2 d-flex justify-content-between">
-            <ul class="list-group list-group-horizontal align-items-center">
-                <li class="list-group-item d-flex justify-content-center">
-                    <label>
-                        <input type="checkbox" name="category" value="Category 1"> Category 1
-                    </label>
-                </li>
-                <li class="list-group-item d-flex justify-content-center">
-                    <label>
-                        <input type="checkbox" name="category" value="Category 2"> Category 2
-                    </label>
-                </li>
-                <li class="list-group-item d-flex justify-content-center">
-                    <label>
-                        <input type="checkbox" name="category" value="Category 3"> Category 3
-                    </label>
-                </li>
-                <li class="list-group-item d-flex justify-content-center">
-                    <label>
-                        <input type="checkbox" name="category" value="Category 4"> Category 4
-                    </label>
-                </li>
-                <li class="list-group-item d-flex justify-content-center">
-                    <label>
-                        <input type="checkbox" name="category" value="Category 5"> Category 5
-                    </label>
-                </li>
-            </ul>
-            <form class="d-flex me-2 pt-4" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
+        <div class="container-fluids pt-5 pb-5 p-2  d-flex justify-content-between">
+            <ul class="list-group list-group-horizontal align-items-start" id="mainCheck"></ul>
+            <button class="btn btn-success" id="clearFilters">Clear Filters</button>
+            <form class="d-flex me-2 search" role="search">
+                <input class="form-control me-2 search-input" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success search-button" type="submit">
+                    <i class="fas fa-search"></i>
+                </button>
             </form>
         </div>
 
-        <div class="container-fluid pt-5 pb-5 mt-5 mb-2">
+        <div class="container-fluid pb-5 mb-2">
             <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4" id="mainCards">
             </div>
         </div>
@@ -123,8 +98,9 @@
         <h2 class="txt px-3 d-flex align-items-center">COHORT</h2>
     </footer>
 
-    <script type="module" src="./assets/js/main.js"></script>
-    <script type="module" src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+    <script src="./assets/js/main.js"></script>
+    <script src="./assets/js/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
         crossorigin="anonymous"></script>
 </body>
