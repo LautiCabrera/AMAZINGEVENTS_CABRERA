@@ -6,6 +6,16 @@ const id = new URLSearchParams(quearySearch).get("id");
 
 let event = data.events.find((evento) => evento._id === id);
 
+let assistanceEstimate = ""
+
+// Conicional para inyectar asistence y estimate segun eventos pasados o futuros
+
+if(event.assistance){
+  assistanceEstimate = `<p class="card-text">Assistance: ${event.assistance}</p>`;
+} else {
+  assistanceEstimate = `<p class="card-text">Estimate: ${event.estimate}</p>`
+}
+
 // Función para crear cards detalles dinamicamente
 
 function cardDetail() {
@@ -26,8 +36,7 @@ function cardDetail() {
           <p class="card-text">Category: ${event.category}</p>
           <p class="card-text">Place: ${event.place}</p>
           <p class="card-text">Max capacity: ${event.capacity}</p>
-          <p class="card-text">Assistance: ${event.assistance}</p>
-          <p class="card-text">Estimate: ${event.estimate || "N/A"}</p>
+          ${assistanceEstimate}
           <p class="card-text">Price: $${event.price}</p>
         </div>
       </div>
