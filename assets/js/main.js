@@ -207,21 +207,21 @@ for (let event of data.events) {
   }
 }
 
-// Función para generar las cards de eventos dinamicamente.
+// Función para generar las cards de eventos dinámicamente.
 // Se le pasa un array de eventos y el id del contenedor del HTML.
 function createCards(items, idContenedor) {
   let cardHTML = "";
   for (const item of items) {
     let card = `
         <div class="col mb-4">
-          <div class="card">
+          <div class="card card-custom">
             <img src="${item.image}" class="card-img-top card-image" alt="${item.name}">
             <div class="card-body">
                 <h5 class="card-title">${item.name}</h5>
                 <p class="card-text">${item.description}</p>
                 <div class="d-flex justify-content-around align-items-center">
                     <h6><b>Price: </b> ${item.price}</h6>
-                    <a href="./details.html" class="btn btn-primary">Details</a>
+                    <a href="./details.html?id=${item._id}" class="btn btn-primary">Details</a>
                 </div>
             </div>
           </div>
@@ -231,7 +231,7 @@ function createCards(items, idContenedor) {
   document.getElementById(idContenedor).innerHTML = cardHTML;
 }
 
-// Función para generar los checkboxes de eventos dinamicamente.
+// Función para generar los checkboxes de eventos dinámicamente.
 // Se le pasa un array de eventos y el id del contenedor del HTML.
 function createCheckboxes(items, idContenedor) {
   const categoriesSet = new Set();
@@ -251,40 +251,57 @@ function createCheckboxes(items, idContenedor) {
   document.getElementById(idContenedor).innerHTML = checkboxHTML;
 }
 
-// Función para filtrar los eventos mediante los checkbox.
-// Recibe el array de eventos, el selector de checkboxes y el id del contenedor del HTML.
-function updateFilteredEvents(events, idContenedor) {
-  const checkboxes = document.querySelectorAll('input[name="category"]');
-  const selectedCategories = Array.from(checkboxes)
-    .filter((checkbox) => checkbox.checked)
-    .map((checkbox) => checkbox.value);
-  if (selectedCategories.length === 0) {
-    createCards(events, idContenedor);
-  } else {
-    const filteredEvents = events.filter((e) =>
-      selectedCategories.includes(e.category)
-    );
-    createCards(filteredEvents, idContenedor);
-  }
-}
-
 function filterGeneral(events, idContenedor) {
-  // Carga todos los eventos de la sección en la que se encuentra la página
-  window.addEventListener("load", () => {
-    createCards(events, idContenedor);
-  });
-  // Agrega los eventos filtrados a los checkboxes
+  const searchInput = document.querySelector(".search-input");
   const checkboxes = document.querySelectorAll('input[name="category"]');
+
+  // Filtrado por buscador y checkbox
+  function searchCards() {
+    const searchText = searchInput.value.toLowerCase();
+    const categoriasSeleccionadas = Array.from(checkboxes)
+      .filter((checkbox) => checkbox.checked)
+      .map((checkbox) => checkbox.value.toLowerCase());
+    const filteredEvents = events.filter((evento) => {
+      const nombreEnMinusculas = evento.name.toLowerCase();
+      return (
+        nombreEnMinusculas.includes(searchText) &&
+        (categoriasSeleccionadas.length === 0 ||
+          categoriasSeleccionadas.includes(evento.category.toLowerCase()))
+      );
+    });
+
+    if (filteredEvents.length > 0) {
+      createCards(filteredEvents, idContenedor);
+    } else {
+      document.getElementById(
+        idContenedor
+      ).innerHTML = `<div class="alert alert-info mt-3">
+          <p class="mb-0 text-center">No se encontraron resultados.</p>
+      </div>`;
+    }
+  }
+
+  // Carga todos los eventos de la sección en la que se encuentra la página
+  createCards(events, idContenedor);
+
+  // Agrega los eventos filtrados a los checkboxes
   checkboxes.forEach((checkbox) => {
     checkbox.addEventListener("change", () => {
-      updateFilteredEvents(events, idContenedor);
+      searchCards();
     });
   });
-  // Limpia los filtros de los checkboxes cargando todos los de la sección
+
+  // Escucha el evento de búsqueda en el input
+  searchInput.addEventListener("input", () => {
+    searchCards();
+  });
+
+  // Limpia los filtros de los checkboxes y search cargando todos los de la sección
   document.querySelector("#clearFilters").addEventListener("click", () => {
     checkboxes.forEach((checkbox) => {
       checkbox.checked = false;
+      searchInput.value = "";
     });
-    createCards(events, idContenedor);
+    searchCards();
   });
 }
