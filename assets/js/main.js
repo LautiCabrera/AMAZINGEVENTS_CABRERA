@@ -18,9 +18,10 @@ async function getData() {
 getData()
   .then(() => {
     allEvents = data.events;
+    currentDate = data.currentDate;
     // Separación del array principal en eventos pasados y futuros.
     for (let event of allEvents) {
-      if (data.currentDate < event.date) {
+      if (currentDate < event.date) {
         upcomingCards.push(event);
       } else {
         pastCards.push(event);
@@ -37,7 +38,9 @@ getData()
     } else if (location === "/details.html") {
       generateDetails(allEvents);
     } else if (location === "/stats.html") {
-      generateStats(allEvents);
+      console.log(allEvents);
+      console.log(currentDate);
+      generateStats(allEvents, currentDate);
     }
   })
   .catch((error) => {
