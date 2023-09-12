@@ -1,2 +1,4 @@
-createCheckboxes(data.events, "mainCheck");
-filterGeneral(data.events, "mainCards");
+function generateEvents(items) {
+  createCheckboxes(items, "mainCheck");
+  filterGeneral(items, "mainCards");
+}

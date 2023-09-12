@@ -1,25 +1,26 @@
-// Parametros de busqueda
+function generateDetails(items) {
+  // Parametros de busqueda
 
-let quearySearch = document.location.search;
+  let quearySearch = document.location.search;
 
-const id = new URLSearchParams(quearySearch).get("id");
+  const id = new URLSearchParams(quearySearch).get("id");
 
-let event = data.events.find((evento) => evento._id === id);
+  let event = items.find((evento) => evento._id.toString() === id);
 
-let assistanceEstimate = ""
+  let assistanceEstimate = "";
 
-// Conicional para inyectar asistence y estimate segun eventos pasados o futuros
+  // Condicional para inyectar asistence y estimate segun eventos pasados o futuros
 
-if(event.assistance){
-  assistanceEstimate = `<p class="card-text">Assistance: ${event.assistance}</p>`;
-} else {
-  assistanceEstimate = `<p class="card-text">Estimate: ${event.estimate}</p>`
-}
+  if (event.assistance) {
+    assistanceEstimate = `<p class="card-text">Assistance: ${event.assistance}</p>`;
+  } else {
+    assistanceEstimate = `<p class="card-text">Estimate: ${event.estimate}</p>`;
+  }
 
-// Función para crear cards detalles dinamicamente
+  // Función para crear cards detalles dinamicamente
 
-function cardDetail() {
-  document.getElementById("detailCards").innerHTML = `<div class="container">
+  function cardDetail() {
+    document.getElementById("detailCards").innerHTML = `<div class="container">
   <div class="row d-flex align-items-center">
     <div class="col-md-6">
       <div class="card mb-4">
@@ -43,6 +44,6 @@ function cardDetail() {
     </div>
   </div>
 </div>`;
+  }
+  cardDetail();
 }
-
-cardDetail();

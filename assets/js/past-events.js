@@ -1,2 +1,4 @@
-createCheckboxes(pastCards, "pastCheck");
-filterGeneral(pastCards, "pastCards");
+function generateEvents(items) {
+  createCheckboxes(items, "pastCheck");
+  filterGeneral(items, "pastCards");
+}

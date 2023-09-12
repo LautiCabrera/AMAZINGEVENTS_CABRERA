@@ -73,60 +73,42 @@
 
     <main class="all p-2">
         <div class="container table">
+            <h2 class="text-center">Event Statistics</h2>
             <table class="table table-bordered">
-                <tbody>
+                <thead class="table-header">
                     <tr>
-                        <th colspan="3" class="table-header">Event Statistics</th>
+                        <th colspan="3">Event Statistics</th>
                     </tr>
+                </thead>
+                <tr>
+                    <td class="bg-primary-subtle">Highest % of Attendance</td>
+                    <td class="bg-primary-subtle">Lowest % of Attendance</td>
+                    <td class="bg-primary-subtle">Larger Capacity</td>
+                </tr>
+                <tbody id="event-statistics">
+                </tbody>
+                <thead class="table-header">
                     <tr>
-                        <td>Event with highest % attendance</td>
-                        <td>Event with lower % attendance</td>
-                        <td>Event with larger capacity</td>
+                        <th colspan="3">Upcoming Events Statistics by Category</th>
                     </tr>
+                </thead>
+                <tbody id="event-upcoming-statistics">
                     <tr>
-                        <td class="p-3"></td>
-                        <td class="p-3"></td>
-                        <td class="p-3"></td>
+                        <td class="bg-primary-subtle">Categories</td>
+                        <td class="bg-primary-subtle">Revenues</td>
+                        <td class="bg-primary-subtle">Percentage of Attendance</td>
                     </tr>
                 </tbody>
-                <tbody>
+                <thead class="table-header">
                     <tr>
-                        <th colspan="3" class="table-header">Upcoming Events Statistics by Category</th>
+                        <th colspan="3">Post Events Statistics by Category</th>
                     </tr>
+                </thead>
+                <tbody id="event-past-statistics">
                     <tr>
-                        <td>Categories</td>
-                        <td>Revenues</td>
-                        <td>Percentage of Attendance</td>
-                    </tr>
-                    <tr>
-                        <td class="p-3"></td>
-                        <td class="p-3"></td>
-                        <td class="p-3"></td>
-                    </tr>
-                    <tr>
-                        <td class="p-3"></td>
-                        <td class="p-3"></td>
-                        <td class="p-3"></td>
-                    </tr>
-                </tbody>
-                <tbody>
-                    <tr>
-                        <th colspan="3" class="table-header">Post Events Statistics by Category</th>
-                    </tr>
-                    <tr>
-                        <td>Categories</td>
-                        <td>Revenues</td>
-                        <td>Percentage of Attendance</td>
-                    </tr>
-                    <tr>
-                        <td class="p-3"></td>
-                        <td class="p-3"></td>
-                        <td class="p-3"></td>
-                    </tr>
-                    <tr>
-                        <td class="p-3"></td>
-                        <td class="p-3"></td>
-                        <td class="p-3"></td>
+                        <td class="bg-primary-subtle">Categories</td>
+                        <td class="bg-primary-subtle">Revenues</td>
+                        <td class="bg-primary-subtle">Percentage of Attendance</td>
                     </tr>
                 </tbody>
             </table>
@@ -142,6 +124,8 @@
         <h2 class="txt px-3 d-flex align-items-center">COHORT</h2>
     </footer>
 
+    <script src="./assets/js/main.js"></script>
+    <script src="./assets/js/stats.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
         crossorigin="anonymous"></script>

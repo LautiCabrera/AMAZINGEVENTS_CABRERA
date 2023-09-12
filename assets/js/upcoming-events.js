@@ -1,2 +1,4 @@
-createCheckboxes(upcomingCards, "upcomingCheck");
-filterGeneral(upcomingCards, "upcomingCards");
+function generateEvents(items) {
+  createCheckboxes(items, "upcomingCheck");
+  filterGeneral(items, "upcomingCards");
+}
