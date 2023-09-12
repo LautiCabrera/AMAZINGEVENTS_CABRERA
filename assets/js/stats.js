@@ -3,20 +3,10 @@ function generateStats(items) {
   const tBodyUpcoming = document.getElementById("event-upcoming-statistics");
   const tBodyPast = document.getElementById("event-past-statistics");
 
-  // Generar tabla de estadísticas generales
-  generateGeneralStatsTable(
-    ordenarPorcentaje(items),
-    ordenarCapacidad(items),
-    tablebodymain
-  );
-
-  // Generar tablas de estadísticas por categoría para eventos futuros y pasados
-  generateCategoryStatsTable(stats, tBodyUpcoming, true);
-  generateCategoryStatsTable(stats, tBodyPast, false);
-
-  // Esta función toma los items y devuelve un arreglo de estadísticas
+  // Separación arreglos de estadísticas
   const withAssistance = [];
   const withEstimate = [];
+  const withCapacity = [];
 
   items.forEach((event) => {
     if (event.assistance != null) {
@@ -32,25 +22,43 @@ function generateStats(items) {
     }
   });
 
+  items.forEach((event) => {
+    withCapacity.push({
+      name: event.name,
+      capacity: event.capacity,
+    });
+  });
+
   // Esta función toma un arreglo de estadísticas y lo ordena de mayor a menor
   function ordenarPorcentaje(stats) {
-    stats.sort((eventA, eventB) => {
+    return stats.slice().sort((eventA, eventB) => {
       return eventB.porcentaje - eventA.porcentaje;
     });
   }
 
   function ordenarCapacidad(stats) {
-    stats.sort((eventA, eventB) => {
+    return stats.slice().sort((eventA, eventB) => {
       return eventB.capacity - eventA.capacity;
     });
   }
+
+  // Generar tabla de estadísticas generales
+  generateGeneralStatsTable(
+    ordenarPorcentaje(withAssistance),
+    ordenarCapacidad(withCapacity),
+    tablebodymain
+  );
+
+  // Generar tablas de estadísticas por categoría para eventos futuros y pasados
+  generateCategoryStatsTable(stats, tBodyUpcoming, true);
+  generateCategoryStatsTable(stats, tBodyPast, false);
 
   // Función para generar tabla de estadísticas generales
   function generateGeneralStatsTable(eventsPorcentaje, eventCapacity, tbody) {
     console.log(eventsPorcentaje);
     console.log(eventCapacity);
     const highestAttendanceEvent = eventsPorcentaje[0];
-    const lowestAttendanceEvent = eventsPorcentaje[events.length - 1];
+    const lowestAttendanceEvent = eventsPorcentaje[eventsPorcentaje.length - 1];
     const highestCapacityEvent = eventCapacity[0];
 
     tbody.innerHTML = `
