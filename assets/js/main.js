@@ -37,10 +37,6 @@ getData()
       generateEvents(pastCards);
     } else if (location === "/details.html") {
       generateDetails(allEvents);
-    } else if (location === "/stats.html") {
-      console.log(allEvents);
-      console.log(currentDate);
-      generateStats(allEvents, currentDate);
     }
   })
   .catch((error) => {
