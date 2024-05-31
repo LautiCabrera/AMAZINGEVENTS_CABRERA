@@ -35,8 +35,6 @@ getData()
       generateEvents(upcomingCards);
     } else if (location === "/past-events.html") {
       generateEvents(pastCards);
-    } else if (location === "/details.html") {
-      generateDetails(allEvents);
     }
   })
   .catch((error) => {
